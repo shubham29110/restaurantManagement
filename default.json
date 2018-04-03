@@ -1,0 +1,4 @@
+{
+    "dealtype":["family", "student", "regular", "monthly", "seasonal"],
+    "userType": ["admin","restrauntOwner"]
+}
