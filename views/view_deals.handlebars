@@ -1,0 +1,62 @@
+<script type="text/javascript">
+
+    function deleteFunc(id){
+       // alert(id)
+      $(document).ready(function(){
+           $.ajax({
+            type: 'post',
+            dataType: 'text',
+            url: 'http://localhost:3000/deals/deleteDeal/' + id,
+            success: function (result) {
+                alert('this is working' + result)
+               $('#'+id).remove();
+            },
+            error : function(err){
+                alert('error called'+ err);
+            }
+        })
+      })
+    }
+
+</script>
+
+<h2 class="page-header">Deal List</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>S No.</th>
+            <th>Deal Name</th>
+            <th>Deal Type</th>
+            <th>Discount(%)</th>
+            <th>Restaurant Name</th>
+            <th>Created By</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each deals}}
+        <tr id = "{{_id}}">
+            <td>{{serial @index}}</td>
+            <td>{{dealname}}</td>
+            <td>{{dealtype}}</td>
+            <td>{{discountoffer}}</td>
+            <td>{{restName}}</td>
+            <td>{{createdByName}}</td>
+
+            <td>
+                <a href='/deals/editDeal/{{_id}}'>Edit</a>
+            </td>
+            <td>
+                <button class ="btn btn-primary" value="{{_id}}"  onclick="deleteFunc('{{_id}}')">Delete</button>
+            </td>
+            <td>
+                {{#if liked}}
+                <a href='/deals/unlike/{{likeid}}'>Unlike</a>
+                {{else}}
+                <a href='/deals/like/{{_id}}'>Like</a>
+                {{/if}} ({{likeCounting}})
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

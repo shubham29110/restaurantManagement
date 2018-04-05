@@ -1,0 +1,62 @@
+<script type="text/javascript">
+
+    function deleteFunc(id){
+       // alert(id)
+      $(document).ready(function(){
+           $.ajax({
+            type: 'post',
+            dataType: 'text',
+            url: 'http://localhost:3000/restaurants/deleteRestaurant/' + id,
+            success: function (result) {
+                alert('this is working' + result)
+               $('#'+id).remove();
+            },
+            error : function(err){
+                alert('error called'+ err);
+            }
+        })
+      })
+    }
+
+</script>
+
+<h2 class="page-header">Restaurant List</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>S No.</th>
+            <th>Restaurat Name</th>
+            <th>Address</th>
+            <th>Owner Name</th>
+            <th>Contact Number</th>
+            <th>Created By</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each rests}}
+        <tr id = "{{_id}}">
+            <td>{{serial @index}}</td>
+            <td>{{restaurantname}}</td>
+            <td>{{address}}</td>
+            <td>{{ownername}}</td>
+            <td>{{contactnumber}}</td>
+            <td>{{createdByName}}</td>
+
+            <td>
+                <a href='/restaurants/editRestaurant/{{_id}}'>Edit</a>
+            </td>
+            <td>
+                <button class ="btn btn-primary" value="{{_id}}"  onclick="deleteFunc('{{_id}}')">Delete</button>
+            </td>
+            <td>
+                {{#if liked}}
+                <a href='/restaurants/unlikeRest/{{likeid}}'>Unlike</a>
+                {{else}}
+                <a href='/restaurants/likeRest/{{_id}}'>Like</a>
+                {{/if}} ({{likeCounting}})
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
