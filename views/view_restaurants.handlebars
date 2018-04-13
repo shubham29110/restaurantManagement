@@ -22,7 +22,7 @@
 
 <h2 class="page-header">Restaurant List</h2>
 
-<table class="table table-striped">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>S No.</th>
@@ -47,7 +47,7 @@
                 <a href='/restaurants/editRestaurant/{{_id}}'>Edit</a>
             </td>
             <td>
-                <button class ="btn btn-primary" value="{{_id}}"  onclick="deleteFunc('{{_id}}')">Delete</button>
+                <button class ="btn btn-info" value="{{_id}}"  onclick="deleteFunc('{{_id}}')">Delete</button>
             </td>
             <td>
                 {{#if liked}}

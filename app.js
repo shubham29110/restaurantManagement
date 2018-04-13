@@ -3,6 +3,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
+
 var exphbs = require('express-handlebars');
 //var hbsHelpers = require('handlebars-helpers');
 
@@ -24,6 +26,13 @@ var restaurants = require('./routes/restaurants');
 
 //init app
 var app = express();
+
+//swagger documentation
+var swaggerUi = require('swagger-ui-express'),
+    swaggerDocument = require('./swagger.json');
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 //handlebars helpers
 var hbs = exphbs.create({
